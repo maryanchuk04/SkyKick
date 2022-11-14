@@ -12,7 +12,7 @@ public class Rover
 
     public Rover(Plateau plateau, int coordinateX, int coordinateY, IDirection direction)
     {
-        _plateau = plateau ?? throw new NullReferenceException("Plateau must be not null");
+        _plateau = plateau ?? throw new PlateauNullException("Plateau must be not null");
         _coordinateX = coordinateX;
         _coordinateY = coordinateY;
         Direction = direction;

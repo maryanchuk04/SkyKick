@@ -4,6 +4,7 @@ using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
 using SkyKick.Services.Command;
+using SkyKick.Services.Directions;
 using SkyKick.Services.Readers;
 
 namespace SkyKick.Tests.Readers;
@@ -47,7 +48,7 @@ public class ConsoleReaderTest
             Assert.That(res.UpperBoundY, Is.EqualTo(5));
         });
     }
-    
+
     [Test]
     public void ReadPlateauThrows_IncorrectInputDataException()
     {
@@ -78,6 +79,15 @@ public class ConsoleReaderTest
         });
     }
 
+    [Test]
+    public void ReadRoverThrows_PlateauNullException()
+    {
+        Assert.Throws<PlateauNullException>(() =>
+        {
+            var rover = new Rover(null, 1, 2, new NorthDirection());
+        });
+    }
+    
     [Test]
     public void ReadRoverBadArrayBound_Throws_IncorrectInputDataException()
     {
