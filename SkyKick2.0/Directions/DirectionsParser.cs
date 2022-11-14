@@ -1,0 +1,36 @@
+using SkyKick2._0.Exceptions;
+using SkyKick2._0.Interfaces;
+
+namespace SkyKick2._0.Directions;
+
+public class DirectionsParser : IDirectionsParser
+{
+    private readonly IDictionary<char, IDirection> _directions;
+
+    public DirectionsParser()
+    {
+        _directions = new Dictionary<char, IDirection>
+        {
+            {'E', new EastDirection()},
+            {'N', new NorthDirection()},
+            {'S', new SouthDirection()},
+            {'W', new WestDirection()}
+        };
+    }
+
+    public IDirection Parse(char direction)
+    {
+        return _directions[direction];
+    }
+
+    public string UnParse(IDirection direction)
+    {
+        foreach (var key in _directions.Keys)
+        {
+            if (_directions[key].GetType() == direction.GetType())
+                return key.ToString();
+        }
+
+        throw new UnParseException("This direction don`t have key value");
+    }
+}
