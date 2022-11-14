@@ -50,9 +50,7 @@ public class ConsoleReader : IReader
         return new Rover(plateau, x, y, direction);
     }
 
-    public List<ICommand> GetCommandsList(string commandString) => _commandParser.Parse(commandString);
-    
-    public string ReadCommandString()
+    public List<ICommand> ReadCommands()
     {
         Console.Write("Rover Movement Plan: ");
         var commandString = Console.ReadLine();
@@ -60,7 +58,7 @@ public class ConsoleReader : IReader
         {
             throw new IncorrectInputDataException("String must be not empty!");
         }
-        
-        return commandString.Trim();
+
+        return _commandParser.Parse(commandString.Trim());;
     }
 }

@@ -30,7 +30,6 @@ public class DirectionsParser : IDirectionsParser
             if (_directions[key].GetType() == direction.GetType())
                 return key.ToString();
         }
-
-        throw new UnParseException("This direction don`t have key value");
+        throw new UnParseException("Direction must be not null!");
     }
 }
