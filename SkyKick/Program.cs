@@ -27,21 +27,21 @@ static class Program
         _roverService = _serviceProvider.GetRequiredService<IRoverService>();
         _writer = _serviceProvider.GetRequiredService<IWriter>();
     }
-    
-    
+
+
     public static void Main(string[] args)
     {
-        var plateau = _reader.ReadPlateau();
-        for (int i = 0; i < 2; i++)
+        try
         {
-            try
+            var plateau = _reader.ReadPlateau();
+            for (int i = 0; i < 2; i++)
             {
                 Input(plateau);
             }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
         }
     }
 
