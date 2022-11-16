@@ -82,7 +82,7 @@ public class ConsoleReaderTest
     [Test]
     public void ReadRoverThrows_PlateauNullException()
     {
-        Assert.Throws<PlateauNullException>(() =>
+        Assert.Throws<PlateauIsNullException>(() =>
         {
             var rover = new Rover(null, 1, 2, new NorthDirection());
         });

@@ -12,7 +12,7 @@ public class Rover
 
     public Rover(Plateau plateau, int coordinateX, int coordinateY, IDirection direction)
     {
-        _plateau = plateau ?? throw new PlateauNullException("Plateau must be not null");
+        _plateau = plateau ?? throw new PlateauIsNullException("Plateau must be not null");
         _coordinateX = coordinateX;
         _coordinateY = coordinateY;
         Direction = direction;
@@ -24,7 +24,7 @@ public class Rover
             ||_coordinateY > _plateau.UpperBoundY
             || _coordinateX < Plateau.LowerBoundX
             || _coordinateY < Plateau.LowerBoundY)
-            throw new RoverCoordinatesOutBoundsException("Coordinates out the bounds plateau!");
+            throw new RoverCoordinatesOutBoundsException("Coordinates of rover out the bounds plateau!");
     }
 
     public int X

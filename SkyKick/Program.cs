@@ -34,7 +34,14 @@ static class Program
         var plateau = _reader.ReadPlateau();
         for (int i = 0; i < 2; i++)
         {
-            Input(plateau);
+            try
+            {
+                Input(plateau);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 
