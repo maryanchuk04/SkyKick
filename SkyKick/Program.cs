@@ -14,7 +14,9 @@ namespace SkyKick;
 static class Program
 {
     private static IServiceProvider _serviceProvider;
-    private static readonly IReader _reader;
+    private static readonly IReader<Rover> _roverReader;
+    private static readonly IReader<Plateau> _plateauReader;
+    private static readonly IReader<List<ICommand>> _commandsReader;
     private static readonly IWriter _writer;
     private static readonly IRoverService _roverService;
     
@@ -23,7 +25,9 @@ static class Program
         ConfigureServices();
         if (_serviceProvider == null)
             throw new ConfigureServicesException("Service provider not configured!");
-        _reader = _serviceProvider.GetRequiredService<IReader>();
+        _roverReader = _serviceProvider.GetRequiredService<IReader<Rover>>();
+        _plateauReader = _serviceProvider.GetRequiredService<IReader<Plateau>>();
+        _commandsReader = _serviceProvider.GetRequiredService<IReader<List<ICommand>>>();
         _roverService = _serviceProvider.GetRequiredService<IRoverService>();
         _writer = _serviceProvider.GetRequiredService<IWriter>();
     }
@@ -32,7 +36,7 @@ static class Program
     {
         try
         {
-            var plateau = _reader.ReadPlateau();
+            var plateau = _plateauReader.Read();
             for (int i = 0; i < 2; i++)
             {
                 Input(plateau);
@@ -46,10 +50,10 @@ static class Program
 
     private static void Input(Plateau plateau)
     {
-        var rover = _reader.ReadRover();
+        var rover = _roverReader.Read();
         _roverService.Rover = rover;
         _roverService.Plateau = plateau;
-        _roverService.ExecuteCommands(_reader.ReadCommands());
+        _roverService.ExecuteCommands(_commandsReader.Read());
         _writer.Write(rover);
     }
 
@@ -57,7 +61,9 @@ static class Program
     {
         _serviceProvider = new ServiceCollection()
             .AddSingleton<ICommandParser, CommandParser>()
-            .AddSingleton<IReader, ConsoleReader>()
+            .AddSingleton<IReader<Rover>, RoverReader>()
+            .AddSingleton<IReader<Plateau>, PlateauReader>()
+            .AddSingleton<IReader<List<ICommand>>, CommandsReader>()
             .AddSingleton<IDirectionsParser, DirectionsParser>()
             .AddSingleton<IRoverService, RoverService>()
             .AddSingleton<IWriter, ConsoleWriter>()

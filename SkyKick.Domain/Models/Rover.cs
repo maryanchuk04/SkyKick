@@ -1,6 +1,4 @@
 using SkyKick.Domain.Enum;
-using SkyKick.Domain.Exceptions;
-using SkyKick.Domain.Interfaces;
 
 namespace SkyKick.Domain.Models;
 

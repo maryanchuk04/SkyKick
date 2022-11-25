@@ -2,9 +2,8 @@ using SkyKick.Domain.Models;
 
 namespace SkyKick.Domain.Interfaces;
 
-public interface IReader
+public interface IReader<T>
+    where T : class
 {
-    Plateau ReadPlateau();
-    Rover ReadRover();
-    List<ICommand> ReadCommands();
+    T Read();
 }
