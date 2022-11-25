@@ -1,3 +1,4 @@
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
 
@@ -5,26 +6,15 @@ namespace SkyKick.Domain.Models;
 
 public class Rover
 {
-    private readonly Plateau _plateau;
     private int _coordinateX;
     private int _coordinateY;
-    public IDirection Direction;
+    public Direction Direction;
 
-    public Rover(Plateau plateau, int coordinateX, int coordinateY, IDirection direction)
+    public Rover(int coordinateX, int coordinateY, Direction direction)
     {
-        _plateau = plateau ?? throw new PlateauIsNullException("Plateau must be not null");
         _coordinateX = coordinateX;
         _coordinateY = coordinateY;
         Direction = direction;
-        ValidateLocation();
-    }
-    
-    public void ValidateLocation() {
-        if (_coordinateX > _plateau.UpperBoundX
-            ||_coordinateY > _plateau.UpperBoundY
-            || _coordinateX < Plateau.LowerBoundX
-            || _coordinateY < Plateau.LowerBoundY)
-            throw new RoverCoordinatesOutBoundsException("Coordinates of rover out the bounds plateau!");
     }
 
     public int X

@@ -4,5 +4,7 @@ namespace SkyKick.Domain.Interfaces;
 
 public interface IRoverService
 {
-    void ExecuteCommands(Rover rover, List<ICommand> commands);
+    public Plateau? Plateau { get; set; }
+    public Rover? Rover { get; set; }
+    void ExecuteCommands(List<ICommand> commands);
 }

@@ -27,8 +27,7 @@ static class Program
         _roverService = _serviceProvider.GetRequiredService<IRoverService>();
         _writer = _serviceProvider.GetRequiredService<IWriter>();
     }
-
-
+    
     public static void Main(string[] args)
     {
         try
@@ -47,8 +46,10 @@ static class Program
 
     private static void Input(Plateau plateau)
     {
-        var rover = _reader.ReadRover(plateau);
-        _roverService.ExecuteCommands(rover, _reader.ReadCommands());
+        var rover = _reader.ReadRover();
+        _roverService.Rover = rover;
+        _roverService.Plateau = plateau;
+        _roverService.ExecuteCommands(_reader.ReadCommands());
         _writer.Write(rover);
     }
 

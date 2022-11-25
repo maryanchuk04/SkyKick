@@ -1,7 +1,7 @@
 using NUnit.Framework;
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Models;
 using SkyKick.Services.Command;
-using SkyKick.Services.Directions;
 
 namespace SkyKick.Tests.Command;
 
@@ -11,9 +11,9 @@ public class RotateLeftCommandTest
     [Test]
     public void RotateLeftShodReturnTrueObject()
     {
-        var rover = new Rover(new Plateau(5,5), 1, 2, new EastDirection());
+        var rover = new Rover(1, 2,Direction.E);
         var rotateLeftCommand = new RotateLeftCommand();
         rotateLeftCommand.Execute(rover);
-        Assert.That(rover.Direction.GetType(), Is.EqualTo(new NorthDirection().GetType()));
+        Assert.That(rover.Direction, Is.EqualTo(Direction.N));
     }
 }

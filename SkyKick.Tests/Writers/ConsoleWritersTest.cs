@@ -1,9 +1,7 @@
-using Moq;
 using NUnit.Framework;
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
-using SkyKick.Services.Directions;
-using SkyKick.Services.Readers;
 using SkyKick.Services.Writers;
 
 namespace SkyKick.Tests.Writers;
@@ -11,21 +9,18 @@ namespace SkyKick.Tests.Writers;
 [TestFixture]
 public class ConsoleWritersTest
 {
-    private Mock<IDirectionsParser> mockDirectionParser;
     private IWriter _writer;
     
     [SetUp]
     public void SetUp()
     {
-        mockDirectionParser = new Mock<IDirectionsParser>();
-        mockDirectionParser.Setup(parser => parser.UnParse(It.IsAny<NorthDirection>())).Returns("N");
-        _writer = new ConsoleWriter(mockDirectionParser.Object);
+        _writer = new ConsoleWriter();
     }
 
     [Test]
     public void ConsoleWriterShouldWriteDataInConsole()
     {
-        var rover = new Rover(new Plateau(5, 5), 1, 2, new NorthDirection());
+        var rover = new Rover(1, 2, Direction.N);
         var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
         _writer.Write(rover);

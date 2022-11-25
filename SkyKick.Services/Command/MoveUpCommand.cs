@@ -1,5 +1,6 @@
 
 
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
 
@@ -9,7 +10,20 @@ public class MoveUpCommand : ICommand
 {
     public void Execute(Rover rover)
     {
-       rover.Direction.MoveUp(rover);
-       rover.ValidateLocation();
+        switch (rover.Direction)
+        {
+            case Direction.N:
+                rover.Y += 1;
+                break;
+            case Direction.E:
+                rover.X += 1;
+                break;
+            case Direction.S:
+                rover.Y -= 1;
+                break;
+            case Direction.W:
+                rover.X -= 1;
+                break;
+        }
     }
 }

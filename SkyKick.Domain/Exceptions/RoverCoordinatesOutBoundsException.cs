@@ -6,4 +6,4 @@ public class RoverCoordinatesOutBoundsException : Exception
         : base(message)
     {
     }
-}
+} 

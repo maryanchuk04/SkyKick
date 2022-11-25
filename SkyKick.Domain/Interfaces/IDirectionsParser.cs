@@ -1,8 +1,8 @@
+using SkyKick.Domain.Enum;
+
 namespace SkyKick.Domain.Interfaces;
 
 public interface IDirectionsParser
 {
-    IDirection Parse(char direction);
-
-    string UnParse(IDirection direction);
+    Direction Parse(char direction);
 }

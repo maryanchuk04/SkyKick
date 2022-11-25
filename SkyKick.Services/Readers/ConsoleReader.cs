@@ -1,3 +1,4 @@
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
@@ -30,7 +31,7 @@ public class ConsoleReader : IReader
         return new Plateau(arrayBound[0], arrayBound[1]);
     }
 
-    public Rover ReadRover(Plateau plateau)
+    public Rover ReadRover()
     {
         Console.Write("Rover Starting Position: ");
         var inputRoverString = Console.ReadLine();
@@ -47,7 +48,7 @@ public class ConsoleReader : IReader
         var x = int.Parse(arrayStrDateOfRover[0]);
         var y = int.Parse(arrayStrDateOfRover[1]);
         var direction = _directionsParser.Parse(char.Parse(arrayStrDateOfRover[2]));
-        return new Rover(plateau, x, y, direction);
+        return new Rover(x, y, direction);
     }
 
     public List<ICommand> ReadCommands()
@@ -59,6 +60,6 @@ public class ConsoleReader : IReader
             throw new IncorrectInputDataException("String must be not empty!");
         }
 
-        return _commandParser.Parse(commandString.Trim());;
+        return _commandParser.Parse(commandString.Trim());
     }
 }

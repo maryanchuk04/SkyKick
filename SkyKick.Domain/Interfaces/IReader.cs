@@ -5,6 +5,6 @@ namespace SkyKick.Domain.Interfaces;
 public interface IReader
 {
     Plateau ReadPlateau();
-    Rover ReadRover(Plateau plateau);
+    Rover ReadRover();
     List<ICommand> ReadCommands();
 }

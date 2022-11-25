@@ -75,26 +75,17 @@ public class ConsoleReaderTest
         Console.SetIn(new StringReader(""));
         Assert.Throws<IncorrectInputDataException>(() =>
         {
-            _reader.ReadRover(_plateau);
+            _reader.ReadRover();
         });
     }
 
-    [Test]
-    public void ReadRoverThrows_PlateauNullException()
-    {
-        Assert.Throws<PlateauIsNullException>(() =>
-        {
-            var rover = new Rover(null, 1, 2, new NorthDirection());
-        });
-    }
-    
     [Test]
     public void ReadRoverBadArrayBound_Throws_IncorrectInputDataException()
     {
         Console.SetIn(new StringReader("1 4 N S"));
         Assert.Throws<IncorrectInputDataException>(() =>
         {
-            _reader.ReadRover(_plateau);
+            _reader.ReadRover();
         });
     }
     
@@ -109,7 +100,7 @@ public class ConsoleReaderTest
         Console.WriteLine(arrayStr[2]);
         Assert.Multiple(() =>
         {
-            var res = _reader.ReadRover(_plateau);
+            var res = _reader.ReadRover();
             Assert.That(res.X, Is.EqualTo(int.Parse(arrayStr[0])));
             Assert.That(res.Y, Is.EqualTo(int.Parse(arrayStr[1])));
         });

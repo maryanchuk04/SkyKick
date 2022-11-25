@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
 using SkyKick.Services;
@@ -14,12 +15,14 @@ public class RoverServiceTest
     private Rover _rover;
     private List<ICommand> _commands;
     private Rover roverAfterExecution;
+    private Plateau _plateau;
 
     [SetUp]
     public void SetUp()
     {
+        _plateau = new Plateau(5, 5);
         _roverService = new RoverService(); 
-        _rover = new Rover(new Plateau(5, 5), 1, 2, new NorthDirection());
+        _rover = new Rover(1, 2, Direction.N);
         _commands = new List<ICommand>()
         {
             new RotateLeftCommand(),
@@ -32,19 +35,21 @@ public class RoverServiceTest
             new MoveUpCommand(),
             new MoveUpCommand(),
         };
-        roverAfterExecution = new Rover(new Plateau(5, 5), 1, 3, new NorthDirection());
+        roverAfterExecution = new Rover(1, 3, Direction.N);
 
     }
     
     [Test]
     public void ExecuteCommandsTrueExecution()
-    {
-        _roverService.ExecuteCommands(_rover, _commands);
+    { 
+        _roverService.Rover = _rover;
+        _roverService.Plateau = _plateau;
+        _roverService.ExecuteCommands(_commands);
         Assert.Multiple(() =>
         {
             Assert.That(roverAfterExecution.X, Is.EqualTo(_rover.X));
             Assert.That(roverAfterExecution.Y, Is.EqualTo(_rover.Y));
-            Assert.That(roverAfterExecution.Direction.GetType(), Is.EqualTo(_rover.Direction.GetType()));
+            Assert.That(roverAfterExecution.Direction, Is.EqualTo(_rover.Direction));
         });
     }
 }
