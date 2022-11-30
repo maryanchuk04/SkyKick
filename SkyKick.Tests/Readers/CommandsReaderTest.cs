@@ -23,7 +23,7 @@ public class CommandsReaderTest
             new MoveUpCommand(),
             new RotateLeftCommand()
         });
-        _reader = new CommandsReader(mockCommandsParser.Object);
+        _reader = new CommandsBuilder(mockCommandsParser.Object);
     }
 
     [Test]

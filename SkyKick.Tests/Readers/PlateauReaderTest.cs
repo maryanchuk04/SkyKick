@@ -15,7 +15,7 @@ public class PlateauReaderTest
     [SetUp]
     public void SetUp()
     {
-        plateauReader = new PlateauReader();
+        plateauReader = new PlateauBuilder();
     }
 
     [Test]

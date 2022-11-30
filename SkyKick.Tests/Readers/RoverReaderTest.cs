@@ -17,7 +17,7 @@ public class RoverReaderTest
     public void SetUp()
     {
         var mockDirectionParser = new Mock<IDirectionsParser>();
-        roverReader = new RoverReader(mockDirectionParser.Object);
+        roverReader = new RoverBuilder(mockDirectionParser.Object);
     }
 
     [Test]

@@ -1,13 +1,12 @@
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Models;
 using SkyKick.Services.Extensions;
 
 namespace SkyKick.Services.Command;
 
 public class RotateLeftCommand : ICommand
 {
-    public void Execute(Rover rover)
+    public void Execute(IRover rover)
     {
-        rover.Direction = rover.Direction.Previous();
+        rover.CurrentPosition.Direction = rover.CurrentPosition.Direction.Previous();
     }
 }

@@ -8,21 +8,21 @@ namespace SkyKick.Services.Command;
 
 public class MoveUpCommand : ICommand
 {
-    public void Execute(Rover rover)
+    public void Execute(IRover rover)
     {
-        switch (rover.Direction)
+        switch (rover.CurrentPosition.Direction)
         {
             case Direction.N:
-                rover.Y += 1;
+                rover.CurrentPosition.Y += 1;
                 break;
             case Direction.E:
-                rover.X += 1;
+                rover.CurrentPosition.X += 1;
                 break;
             case Direction.S:
-                rover.Y -= 1;
+                rover.CurrentPosition.Y -= 1;
                 break;
             case Direction.W:
-                rover.X -= 1;
+                rover.CurrentPosition.X -= 1;
                 break;
         }
     }

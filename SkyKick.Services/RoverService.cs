@@ -1,13 +1,19 @@
 using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Models;
 
 namespace SkyKick.Services;
 
 public class RoverService : IRoverService
 {
-    public Plateau? Plateau { get; set; }
-    public Rover? Rover { get; set; }
+    private readonly IWriter _writer;
+
+    public RoverService(IWriter writer)
+    {
+        _writer = writer;
+    }
+
+    public IPlateau? Plateau { get; set; }
+    public IRover? Rover { get; set; }
     
     public void ExecuteCommands(List<ICommand> commands)
     {
@@ -20,12 +26,17 @@ public class RoverService : IRoverService
         });
     }
 
+    public void OutputResults()
+    {
+        _writer.Write(Rover!);
+    }
+
     private void Validate()
     {
-        if (Rover!.X > Plateau!.UpperBoundX
-            ||Rover.Y > Plateau.UpperBoundY
-            || Rover.X < Plateau.LowerBoundX
-            || Rover.Y < Plateau.LowerBoundY)
+        if (Rover!.CurrentPosition.X > Plateau!.UpperBoundX
+            ||Rover.CurrentPosition.Y > Plateau.UpperBoundY
+            || Rover.CurrentPosition.X < Plateau.LowerBoundX
+            || Rover.CurrentPosition.Y < Plateau.LowerBoundY)
             throw new RoverCoordinatesOutBoundsException("Coordinates of rover out the bounds plateau!");
     }
 }

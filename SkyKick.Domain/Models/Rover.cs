@@ -1,29 +1,14 @@
 using SkyKick.Domain.Enum;
+using SkyKick.Domain.Interfaces;
 
 namespace SkyKick.Domain.Models;
 
-public class Rover
+public class Rover : IRover
 {
-    private int _coordinateX;
-    private int _coordinateY;
-    public Direction Direction;
-
-    public Rover(int coordinateX, int coordinateY, Direction direction)
+    public Rover(IPosition startPosition)
     {
-        _coordinateX = coordinateX;
-        _coordinateY = coordinateY;
-        Direction = direction;
+        CurrentPosition = startPosition;
     }
 
-    public int X
-    {
-        get => _coordinateX;
-        set => _coordinateX = value;
-    }
-    
-    public int Y
-    {
-        get => _coordinateY;
-        set => _coordinateY = value;
-    }
+    public IPosition CurrentPosition { get; }
 }
