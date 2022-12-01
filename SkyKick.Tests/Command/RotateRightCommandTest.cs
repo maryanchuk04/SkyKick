@@ -1,20 +1,28 @@
+using Moq;
 using NUnit.Framework;
 using SkyKick.Domain.Enum;
+using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
 using SkyKick.Services.Command;
-using SkyKick.Services.Directions;
 
 namespace SkyKick.Tests.Command;
 
-[TestFixture]
 public class RotateRightCommandTest
 {
-    [Test]
-    public void RotateRightShodReturnTrueObject()
+    private RotateRightCommand _rotateRight;
+
+    [SetUp]
+    public void SetUp()
     {
-        var rover = new Rover(1, 2, Direction.N);
-        var rotateLeftCommand = new RotateRightCommand();
-        rotateLeftCommand.Execute(rover);
-        Assert.That(rover.Direction, Is.EqualTo(Direction.E));
+        _rotateRight = new RotateRightCommand();
+    }
+
+    [Test]
+    public void RotateLeftShodReturnTrueObject()
+    {
+        var rover = new Mock<IRover>();
+        rover.Setup(x => x.CurrentPosition).Returns(new Position(1, 2, Direction.N));
+        _rotateRight.Execute(rover.Object);
+        Assert.That(rover.Object.CurrentPosition.Direction, Is.EqualTo(Direction.E));
     }
 }

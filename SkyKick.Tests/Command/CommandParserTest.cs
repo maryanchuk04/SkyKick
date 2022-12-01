@@ -1,6 +1,5 @@
-using Moq;
+
 using NUnit.Framework;
-using SkyKick.Domain.Interfaces;
 using SkyKick.Services.Command;
 
 namespace SkyKick.Tests.Command;

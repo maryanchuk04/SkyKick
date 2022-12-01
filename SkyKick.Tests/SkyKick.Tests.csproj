@@ -22,4 +22,8 @@
       <ProjectReference Include="..\SkyKick.Services\SkyKick.Services.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Readers" />
+    </ItemGroup>
+
 </Project>
