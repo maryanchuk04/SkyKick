@@ -1,11 +1,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using SkyKick.Domain.Interfaces;
+using SkyKick.Domain.Interfaces.Parsers;
 using SkyKick.Domain.Interfaces.Providers;
+using SkyKick.Domain.Interfaces.Validators;
 using SkyKick.Domain.Models;
 using SkyKick.Services;
+using SkyKick.Services.Builders;
 using SkyKick.Services.Command;
 using SkyKick.Services.Directions;
-using SkyKick.Services.Readers;
+using SkyKick.Services.Validators;
 
 namespace SkyKick;
 
@@ -15,15 +18,16 @@ public static class Startup
     {
         return new ServiceCollection()
             .AddSingleton<ICommandParser, CommandParser>()
-            .AddSingleton<IReader<IRover>, RoverBuilder>()
-            .AddSingleton<IReader<IPlateau>, PlateauBuilder>()
-            .AddSingleton<IReader<List<ICommand>>, CommandsBuilder>()
+            .AddSingleton<IBuilder<IRover>, RoverBuilder>()
+            .AddSingleton<IBuilder<IPlateau>, PlateauBuilder>()
+            .AddSingleton<IBuilder<List<ICommand>>, CommandsBuilder>()
             .AddSingleton<IDirectionsParser, DirectionsParser>()
             .AddSingleton<IRoverService, RoverService>()
             .AddSingleton<IWriter, ConsoleChannel>()
             .AddSingleton<ICoordinateProvider, ConsoleChannel>()
             .AddSingleton<ICommandsProvider, ConsoleChannel>()
             .AddSingleton<IDirectionProvider, ConsoleChannel>()
+            .AddSingleton<ICoordinatesValidator, CoordinatesValidator>()
             .BuildServiceProvider();
     }
 }

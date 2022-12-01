@@ -1,6 +1,7 @@
 using Moq;
 using NUnit.Framework;
 using SkyKick.Domain.Interfaces;
+using SkyKick.Domain.Interfaces.Parsers;
 using SkyKick.Services;
 
 namespace SkyKick.Tests;
@@ -15,7 +16,7 @@ public class ConsoleChannelTest
     [SetUp]
     public void SetUp()
     {
-        consoleChannel = new ConsoleChannel(directionParserMock.Object, commandsParserMock.Object);
+        consoleChannel = new ConsoleChannel();
     }
 
     [Test]

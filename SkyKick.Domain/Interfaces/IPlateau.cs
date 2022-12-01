@@ -2,8 +2,8 @@ namespace SkyKick.Domain.Interfaces;
 
 public interface IPlateau
 {
-    int LowerBoundX { get; }
-    int LowerBoundY { get; }
+    const int LowerBoundX = 0;
+    const int LowerBoundY = 0;
     int UpperBoundX { get; set; }
     int UpperBoundY { get; set; }
 }

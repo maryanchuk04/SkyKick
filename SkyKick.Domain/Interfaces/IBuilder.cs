@@ -1,7 +1,7 @@
 namespace SkyKick.Domain.Interfaces;
 
-public interface IReader<T>
+public interface IBuilder<T>
     where T : class
 {
-    T Read();
+    T Build();
 }

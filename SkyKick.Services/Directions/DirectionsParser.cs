@@ -1,5 +1,5 @@
 using SkyKick.Domain.Enum;
-using SkyKick.Domain.Interfaces;
+using SkyKick.Domain.Interfaces.Parsers;
 
 namespace SkyKick.Services.Directions;
 

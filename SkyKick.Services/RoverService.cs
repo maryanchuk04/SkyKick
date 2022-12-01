@@ -35,8 +35,8 @@ public class RoverService : IRoverService
     {
         if (Rover!.CurrentPosition.X > Plateau!.UpperBoundX
             ||Rover.CurrentPosition.Y > Plateau.UpperBoundY
-            || Rover.CurrentPosition.X < Plateau.LowerBoundX
-            || Rover.CurrentPosition.Y < Plateau.LowerBoundY)
+            || Rover.CurrentPosition.X < IPlateau.LowerBoundX
+            || Rover.CurrentPosition.Y < IPlateau.LowerBoundY)
             throw new RoverCoordinatesOutBoundsException("Coordinates of rover out the bounds plateau!");
     }
 }

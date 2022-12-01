@@ -1,6 +1,6 @@
-namespace SkyKick.Domain.Interfaces;
+namespace SkyKick.Domain.Interfaces.Parsers;
 
 public interface ICommandParser
 {
-    List<ICommand> Parse(string commandString);
+    List<ICommand> Parse(List<char> commandString);
 }

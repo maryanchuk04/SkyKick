@@ -1,4 +1,5 @@
 using SkyKick.Domain.Interfaces;
+using SkyKick.Domain.Interfaces.Parsers;
 
 namespace SkyKick.Services.Command;
 
@@ -16,9 +17,9 @@ public class CommandParser : ICommandParser
         };
     }
     
-    public List<ICommand> Parse(string commandString)
+    public List<ICommand> Parse(List<char> commandArray)
     {
-        return commandString.Select(command => _commands[command]).ToList();
+        return commandArray.Select(command => _commands[command]).ToList();
     }
 
 }

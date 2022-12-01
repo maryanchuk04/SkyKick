@@ -4,5 +4,5 @@ namespace SkyKick.Domain.Interfaces.Providers;
 
 public interface IDirectionProvider
 {
-    Direction Provide();
+    char Provide();
 }

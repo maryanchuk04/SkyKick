@@ -7,9 +7,9 @@ namespace SkyKick;
 static class Program
 {
     private static IServiceProvider _serviceProvider;
-    private static readonly IReader<IRover> _roverReader;
-    private static readonly IReader<IPlateau> _plateauReader;
-    private static readonly IReader<List<ICommand>> _commandsReader;
+    private static readonly IBuilder<IRover> RoverBuilder;
+    private static readonly IBuilder<IPlateau> PlateauBuilder;
+    private static readonly IBuilder<List<ICommand>> CommandsBuilder;
     private static readonly IRoverService _roverService;
     
     static Program()
@@ -17,9 +17,9 @@ static class Program
         _serviceProvider = Startup.ConfigureServices();
         if (_serviceProvider == null)
             throw new ConfigureServicesException("Service provider not configured!");
-        _roverReader = _serviceProvider.GetRequiredService<IReader<IRover>>();
-        _plateauReader = _serviceProvider.GetRequiredService<IReader<IPlateau>>();
-        _commandsReader = _serviceProvider.GetRequiredService<IReader<List<ICommand>>>();
+        RoverBuilder = _serviceProvider.GetRequiredService<IBuilder<IRover>>();
+        PlateauBuilder = _serviceProvider.GetRequiredService<IBuilder<IPlateau>>();
+        CommandsBuilder = _serviceProvider.GetRequiredService<IBuilder<List<ICommand>>>();
         _roverService = _serviceProvider.GetRequiredService<IRoverService>();
     }
     
@@ -28,7 +28,7 @@ static class Program
         try
         {
             Console.Write("Plateau ");
-            var plateau = _plateauReader.Read();
+            var plateau = PlateauBuilder.Build();
             for (int i = 0; i < 2; i++)
             {
                 Console.Write("Rover ");
@@ -43,10 +43,10 @@ static class Program
 
     private static void Input(IPlateau plateau)
     {
-        var rover = _roverReader.Read();
+        var rover = RoverBuilder.Build();
         _roverService.Rover = rover;
         _roverService.Plateau = plateau;
-        _roverService.ExecuteCommands(_commandsReader.Read());
+        _roverService.ExecuteCommands(CommandsBuilder.Build());
         _roverService.OutputResults();
     }
 }

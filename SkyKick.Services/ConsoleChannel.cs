@@ -7,17 +7,9 @@ namespace SkyKick.Services;
 
 public class ConsoleChannel : ICommandsProvider, IDirectionProvider, ICoordinateProvider, IWriter
 {
-    private readonly IDirectionsParser _directionsParser;
-    private readonly ICommandParser _commandParser;
     private const string Separator = " ";
-
-    public ConsoleChannel(IDirectionsParser directionsParser, ICommandParser commandParser)
-    {
-        _directionsParser = directionsParser;
-        _commandParser = commandParser;
-    }
-
-    List<ICommand> ICommandsProvider.Provide()
+    
+    List<char> ICommandsProvider.Provide()
     {
         Console.Write("Rover Movement Plan: ");
         var commandString = Console.ReadLine();
@@ -25,11 +17,11 @@ public class ConsoleChannel : ICommandsProvider, IDirectionProvider, ICoordinate
         {
             throw new IncorrectInputDataException("String must be not empty!");
         }
-
-        return _commandParser.Parse(commandString.Trim());
+        
+        return commandString.Trim().ToCharArray().ToList();
     }
 
-    Direction IDirectionProvider.Provide()
+    char IDirectionProvider.Provide()
     {
         Console.Write("Rover Starting Direction: ");
         var inputDirectionString = Console.ReadLine();
@@ -38,7 +30,7 @@ public class ConsoleChannel : ICommandsProvider, IDirectionProvider, ICoordinate
             throw new IncorrectInputDataException("Direction is not correct");
         }
 
-        return _directionsParser.Parse(char.Parse(inputDirectionString));
+        return inputDirectionString[0];
     }
 
     (int, int) ICoordinateProvider.Provide()

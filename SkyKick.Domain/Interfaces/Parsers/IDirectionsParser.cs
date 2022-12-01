@@ -1,6 +1,6 @@
 using SkyKick.Domain.Enum;
 
-namespace SkyKick.Domain.Interfaces;
+namespace SkyKick.Domain.Interfaces.Parsers;
 
 public interface IDirectionsParser
 {
