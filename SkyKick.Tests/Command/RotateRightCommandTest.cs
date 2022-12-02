@@ -18,7 +18,7 @@ public class RotateRightCommandTest
     }
 
     [Test]
-    public void RotateLeftShodReturnTrueObject()
+    public void Should_Return_TrueObject()
     {
         var rover = new Mock<IRover>();
         rover.Setup(x => x.CurrentPosition).Returns(new Position(1, 2, Direction.N));

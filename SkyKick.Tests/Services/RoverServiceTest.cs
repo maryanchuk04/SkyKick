@@ -1,6 +1,7 @@
 using Moq;
 using NUnit.Framework;
 using SkyKick.Domain.Enum;
+using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
 using SkyKick.Services;
@@ -13,10 +14,10 @@ namespace SkyKick.Tests.Services;
 public class RoverServiceTest
 {
     private Mock<IWriter> _writer = new Mock<IWriter>();
-    private readonly Mock<IRover> _rover = new Mock<IRover>();
-    private readonly Mock<IPlateau> _plateau = new Mock<IPlateau>();
+    private Mock<IRover> _rover = new Mock<IRover>();
+    private Mock<IPlateau> _plateau = new Mock<IPlateau>();
     private RoverService _roverService;
-    
+
     [SetUp]
     public void SetUp()
     {
@@ -31,7 +32,7 @@ public class RoverServiceTest
     }
     
     [Test]
-    public void ExecuteCommandsTrueExecution()
+    public void Should_DoesNotThrows()
     {
         Assert.DoesNotThrow(() =>
         {
@@ -39,6 +40,37 @@ public class RoverServiceTest
         });
     }
 
+    [Test]
+    public void Should_Throws_RoverCoordinatesOutBoundsException()
+    {
+        _rover.Setup(x => x.CurrentPosition).Returns(new Position(5, 5, Direction.N));
+        Assert.Throws<RoverCoordinatesOutBoundsException>(() =>
+        {
+            _roverService.ExecuteCommands(GetTestCommands());
+        });
+    }
+    
+    [Test]
+    public void Should_DoesNotThrowsAnyExceptions()
+    {
+        Assert.DoesNotThrow(() =>
+        {
+            _roverService.OutputResults();
+        });
+    }
+
+    [Test]
+    public void Should_RoverOrPlateauIsNull_Throws_NullReferenceException()
+    {
+        _rover = new Mock<IRover>();
+        _plateau = new Mock<IPlateau>();
+        _roverService = new RoverService(null);
+        Assert.Throws<NullReferenceException>(() =>
+        {
+            _roverService.ExecuteCommands(GetTestCommands());
+        });
+    }
+    
     private List<ICommand> GetTestCommands()
     {
         return new List<ICommand>()

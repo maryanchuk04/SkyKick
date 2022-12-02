@@ -3,21 +3,32 @@ using NUnit.Framework;
 using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
+using SkyKick.Services.Command;
 
 namespace SkyKick.Tests.Command;
 
 [TestFixture]
 public class MoveUpCommandTest
 {
-    
+    private MoveUpCommand _moveUpCommand;
+    private Mock<IRover> _mockRover = new();
+
     [SetUp]
     public void SetUp()
     {
-        
+        _moveUpCommand = new MoveUpCommand();
     }
     
-    public void MoveUpExecuteTest()
+    [Test]
+    public void Should_MoveUpRover_ExecuteDoesNotThrow()
     {
-        
+        var startPosition = new Position(1, 1, Direction.N);
+        int expectedY = startPosition.Y+1;
+        _mockRover.Setup(x => x.CurrentPosition).Returns(startPosition);
+        Assert.DoesNotThrow(() =>
+        {
+            _moveUpCommand.Execute(_mockRover.Object);
+            Assert.That(_mockRover.Object.CurrentPosition.Y, Is.EqualTo(expectedY));
+        });
     }
 }

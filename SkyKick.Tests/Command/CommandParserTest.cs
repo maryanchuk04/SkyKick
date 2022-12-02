@@ -13,7 +13,7 @@ public class CommandParserTest
     };
     
     [Test]
-    public void ParseShouldReturnSameAmountCommands()
+    public void Should_Return_SameAmountCommands()
     {
         var commandParser = new CommandParser();
         var list = commandParser.Parse(TestCase);

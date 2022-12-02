@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using SkyKick.Domain.Enum;
 using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
@@ -5,6 +6,7 @@ using SkyKick.Domain.Interfaces.Providers;
 
 namespace SkyKick.Services;
 
+[ExcludeFromCodeCoverage]
 public class ConsoleChannel : ICommandsProvider, IDirectionProvider, ICoordinateProvider, IWriter
 {
     private const string Separator = " ";
