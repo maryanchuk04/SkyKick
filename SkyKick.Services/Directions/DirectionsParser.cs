@@ -3,7 +3,7 @@ using SkyKick.Domain.Interfaces.Parsers;
 
 namespace SkyKick.Services.Directions;
 
-public class DirectionsParser : IDirectionsParser
+public class DirectionsParser : IParser<Direction, char>
 {
     public Direction Parse(char direction)
     {

@@ -1,3 +1,4 @@
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Interfaces.Parsers;
 using SkyKick.Domain.Interfaces.Providers;
@@ -10,10 +11,10 @@ public class RoverBuilder : IBuilder<IRover>
 {
     private readonly ICoordinateProvider _coordinateProvider;
     private readonly IDirectionProvider _directionProvider;
-    private readonly IDirectionsParser _directionsParser;
+    private readonly IParser<Direction, char> _directionsParser;
     private readonly ICoordinatesValidator _coordinatesValidator;
     
-    public RoverBuilder(ICoordinateProvider coordinateProvider, IDirectionProvider directionProvider, IDirectionsParser directionsParser, ICoordinatesValidator coordinatesValidator)
+    public RoverBuilder(ICoordinateProvider coordinateProvider, IDirectionProvider directionProvider, IParser<Direction, char> directionsParser, ICoordinatesValidator coordinatesValidator)
     {
         _coordinateProvider = coordinateProvider;
         _directionProvider = directionProvider;

@@ -1,5 +1,6 @@
 using Moq;
 using NUnit.Framework;
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces.Parsers;
 using SkyKick.Domain.Interfaces.Providers;
 using SkyKick.Domain.Interfaces.Validators;
@@ -14,7 +15,7 @@ public class RoverBuilderTest
     private RoverBuilder _roverBuilder;
     private Mock<ICoordinateProvider> mockCoordinateProvider = new Mock<ICoordinateProvider>();
     private Mock<IDirectionProvider> mockDirectionProvider = new Mock<IDirectionProvider>();
-    private Mock<IDirectionsParser> mockDirectionsParser = new Mock<IDirectionsParser>();
+    private Mock<IParser<Direction, char>> mockDirectionsParser = new Mock<IParser<Direction, char>>();
     private Mock<ICoordinatesValidator> mockCoordinatesValidator = new Mock<ICoordinatesValidator>();
 
     [SetUp]

@@ -7,9 +7,9 @@ namespace SkyKick.Services.Builders;
 public class CommandsBuilder : IBuilder<List<ICommand>>
 {
     private readonly ICommandsProvider _commandsProvider;
-    private readonly ICommandParser _commandParser;
+    private readonly IParser<List<ICommand>, List<char>> _commandParser;
     
-    public CommandsBuilder(ICommandsProvider commandsProvider, ICommandParser commandParser)
+    public CommandsBuilder(ICommandsProvider commandsProvider, IParser<List<ICommand>, List<char>> commandParser)
     {
         _commandsProvider = commandsProvider;
         _commandParser = commandParser;

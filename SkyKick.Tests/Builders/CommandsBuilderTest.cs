@@ -13,7 +13,8 @@ public class CommandsBuilderTest
 {
     private CommandsBuilder _commandsBuilder;
     private Mock<ICommandsProvider> mockCommandsProvider = new Mock<ICommandsProvider>();
-    private Mock<ICommandParser> mockCommandsParser = new Mock<ICommandParser>();
+    private Mock<IParser<List<ICommand>, List<char>>> mockCommandsParser =
+        new Mock<IParser<List<ICommand>, List<char>>>();
 
     [Test]
     public void Should_Return_NotNullList()

@@ -3,7 +3,7 @@ using SkyKick.Domain.Interfaces.Parsers;
 
 namespace SkyKick.Services.Command;
 
-public class CommandParser : ICommandParser
+public class CommandParser : IParser<List<ICommand>, List<char>>
 {
     private readonly IDictionary<char, ICommand> _commands;
     

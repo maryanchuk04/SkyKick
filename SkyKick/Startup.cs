@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Interfaces.Parsers;
 using SkyKick.Domain.Interfaces.Providers;
@@ -17,11 +18,11 @@ public static class Startup
     public static ServiceProvider ConfigureServices()
     {
         return new ServiceCollection()
-            .AddSingleton<ICommandParser, CommandParser>()
+            .AddSingleton<IParser<List<ICommand>, List<char>>, CommandParser>()
             .AddSingleton<IBuilder<IRover>, RoverBuilder>()
             .AddSingleton<IBuilder<IPlateau>, PlateauBuilder>()
             .AddSingleton<IBuilder<List<ICommand>>, CommandsBuilder>()
-            .AddSingleton<IDirectionsParser, DirectionsParser>()
+            .AddSingleton<IParser<Direction, char>, DirectionsParser>()
             .AddSingleton<IRoverService, RoverService>()
             .AddSingleton<IWriter, ConsoleChannel>()
             .AddSingleton<ICoordinateProvider, ConsoleChannel>()
