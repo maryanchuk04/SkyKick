@@ -1,9 +1,8 @@
 using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Interfaces.Parsers;
-using SkyKick.Domain.Interfaces.Providers;
-using SkyKick.Domain.Interfaces.Validators;
 using SkyKick.Domain.Models;
+using SkyKick.Services.Interfaces;
+using SkyKick.Services.Interfaces.Providers;
 
 namespace SkyKick.Services.Builders;
 

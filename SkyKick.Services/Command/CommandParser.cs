@@ -1,5 +1,5 @@
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Interfaces.Parsers;
+using SkyKick.Services.Interfaces;
 
 namespace SkyKick.Services.Command;
 

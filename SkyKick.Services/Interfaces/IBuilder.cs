@@ -1,4 +1,4 @@
-namespace SkyKick.Domain.Interfaces;
+namespace SkyKick.Services.Interfaces;
 
 public interface IBuilder<T>
     where T : class

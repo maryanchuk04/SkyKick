@@ -1,14 +1,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Interfaces.Parsers;
-using SkyKick.Domain.Interfaces.Providers;
-using SkyKick.Domain.Interfaces.Validators;
 using SkyKick.Domain.Models;
 using SkyKick.Services;
 using SkyKick.Services.Builders;
 using SkyKick.Services.Command;
 using SkyKick.Services.Directions;
+using SkyKick.Services.Interfaces;
+using SkyKick.Services.Interfaces.Providers;
 using SkyKick.Services.Validators;
 
 namespace SkyKick;

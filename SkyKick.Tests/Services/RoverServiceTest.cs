@@ -6,6 +6,7 @@ using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
 using SkyKick.Services;
 using SkyKick.Services.Command;
+using SkyKick.Services.Interfaces;
 
 
 namespace SkyKick.Tests.Services;

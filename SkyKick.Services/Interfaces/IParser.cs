@@ -1,4 +1,4 @@
-namespace SkyKick.Domain.Interfaces.Parsers;
+namespace SkyKick.Services.Interfaces;
 
 public interface IParser<TIn, TOut>
 { 

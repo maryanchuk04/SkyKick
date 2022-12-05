@@ -2,7 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 using SkyKick.Domain.Enum;
 using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Interfaces.Providers;
+using SkyKick.Services.Interfaces;
+using SkyKick.Services.Interfaces.Providers;
 
 namespace SkyKick.Services;
 

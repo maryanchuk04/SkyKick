@@ -1,6 +1,6 @@
 using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Interfaces.Validators;
+using SkyKick.Services.Interfaces;
 
 namespace SkyKick.Services.Validators;
 

@@ -1,6 +1,6 @@
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Interfaces.Parsers;
-using SkyKick.Domain.Interfaces.Providers;
+using SkyKick.Services.Interfaces;
+using SkyKick.Services.Interfaces.Providers;
 
 namespace SkyKick.Services.Builders;
 

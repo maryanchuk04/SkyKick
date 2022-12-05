@@ -1,4 +1,4 @@
-namespace SkyKick.Domain.Interfaces.Validators;
+namespace SkyKick.Services.Interfaces;
 
 public interface ICoordinatesValidator
 {

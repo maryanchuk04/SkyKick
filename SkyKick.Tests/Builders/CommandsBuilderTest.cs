@@ -1,10 +1,10 @@
 using Moq;
 using NUnit.Framework;
 using SkyKick.Domain.Interfaces;
-using SkyKick.Domain.Interfaces.Parsers;
-using SkyKick.Domain.Interfaces.Providers;
 using SkyKick.Services.Builders;
 using SkyKick.Services.Command;
+using SkyKick.Services.Interfaces;
+using SkyKick.Services.Interfaces.Providers;
 
 namespace SkyKick.Tests.Builders;
 

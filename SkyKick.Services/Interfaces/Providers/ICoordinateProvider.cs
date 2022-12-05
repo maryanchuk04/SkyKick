@@ -1,4 +1,4 @@
-namespace SkyKick.Domain.Interfaces.Providers;
+namespace SkyKick.Services.Interfaces.Providers;
 
 public interface ICoordinateProvider
 {

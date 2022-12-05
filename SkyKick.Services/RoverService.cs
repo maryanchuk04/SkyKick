@@ -1,5 +1,6 @@
 using SkyKick.Domain.Exceptions;
 using SkyKick.Domain.Interfaces;
+using SkyKick.Services.Interfaces;
 
 namespace SkyKick.Services;
 
