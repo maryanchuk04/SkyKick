@@ -18,17 +18,29 @@ public class MoveUpCommandTest
     {
         _moveUpCommand = new MoveUpCommand();
     }
-    
+
     [Test]
     public void Should_MoveUpRover_ExecuteDoesNotThrow()
     {
         var startPosition = new Position(1, 1, Direction.N);
-        int expectedY = startPosition.Y+1;
         _mockRover.Setup(x => x.CurrentPosition).Returns(startPosition);
         Assert.DoesNotThrow(() =>
         {
             _moveUpCommand.Execute(_mockRover.Object);
-            Assert.That(_mockRover.Object.CurrentPosition.Y, Is.EqualTo(expectedY));
         });
+    }
+
+    [Test]
+    [TestCase(1)]
+    [TestCase(4)]
+    [TestCase(3)]
+    public void Should_MoveUpRover_Return_TrueValues(int y)
+    {
+        var startPosition = new Position(1, y, Direction.N);
+        var expectedY = startPosition.Y + 1;
+        _mockRover.Setup(x => x.CurrentPosition).Returns(startPosition);
+        _moveUpCommand.Execute(_mockRover.Object);
+
+        Assert.That(_mockRover.Object.CurrentPosition.Y, Is.EqualTo(expectedY));
     }
 }

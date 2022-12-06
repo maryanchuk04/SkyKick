@@ -14,9 +14,9 @@ namespace SkyKick.Tests.Services;
 [TestFixture]
 public class RoverServiceTest
 {
-    private Mock<IWriter> _writer = new Mock<IWriter>();
-    private Mock<IRover> _rover = new Mock<IRover>();
-    private Mock<IPlateau> _plateau = new Mock<IPlateau>();
+    private Mock<IWriter> _writer = new ();
+    private Mock<IRover> _rover = new ();
+    private Mock<IPlateau> _plateau = new ();
     private RoverService _roverService;
 
     [SetUp]
@@ -31,7 +31,37 @@ public class RoverServiceTest
             Plateau = _plateau.Object
         };
     }
-    
+
+    [Test(Description = "First test from example! Movement plan 'LMLMLMLMM'")]
+    public void Should_Return_CorrectDataFirst()
+    {
+        _roverService.ExecuteCommands(GetTestCommands());
+        Assert.Multiple(() =>
+        {
+            Assert.That(_rover.Object.CurrentPosition.X, Is.EqualTo(1));
+            Assert.That(_rover.Object.CurrentPosition.Y, Is.EqualTo(3));
+            Assert.That(_rover.Object.CurrentPosition.Direction, Is.EqualTo(Direction.N));
+        });
+    }
+
+    [Test(Description = "Second test from example! Movement plan 'MMRMMRMRRM'")]
+    public void Should_Return_CorrectDataSecond()
+    {
+        _rover.Setup(x => x.CurrentPosition).Returns(new Position(3, 3, Direction.E));
+        _roverService = new RoverService(null)
+        {
+            Rover = _rover.Object,
+            Plateau = _plateau.Object
+        };
+        _roverService.ExecuteCommands(GetTestCommands_SecondExample());
+        Assert.Multiple(() =>
+        {
+            Assert.That(_rover.Object.CurrentPosition.X, Is.EqualTo(5));
+            Assert.That(_rover.Object.CurrentPosition.Y, Is.EqualTo(1));
+            Assert.That(_rover.Object.CurrentPosition.Direction, Is.EqualTo(Direction.E));
+        });
+    }
+
     [Test]
     public void Should_DoesNotThrows()
     {
@@ -50,7 +80,7 @@ public class RoverServiceTest
             _roverService.ExecuteCommands(GetTestCommands());
         });
     }
-    
+
     [Test]
     public void Should_DoesNotThrowsAnyExceptions()
     {
@@ -71,7 +101,7 @@ public class RoverServiceTest
             _roverService.ExecuteCommands(GetTestCommands());
         });
     }
-    
+
     private List<ICommand> GetTestCommands()
     {
         return new List<ICommand>()
@@ -87,5 +117,22 @@ public class RoverServiceTest
             new MoveUpCommand(),
         };
     }
-    
+
+    private List<ICommand> GetTestCommands_SecondExample()
+    {
+        return new List<ICommand>()
+        {
+            new MoveUpCommand(),
+            new MoveUpCommand(),
+            new RotateRightCommand(),
+            new MoveUpCommand(),
+            new MoveUpCommand(),
+            new RotateRightCommand(),
+            new MoveUpCommand(),
+            new RotateRightCommand(),
+            new RotateRightCommand(),
+            new MoveUpCommand()
+        };
+    }
+
 }

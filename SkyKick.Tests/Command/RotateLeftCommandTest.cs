@@ -17,7 +17,7 @@ public class RotateLeftCommandTest
     {
         _leftCommand = new RotateLeftCommand();
     }
-    
+
     [Test]
     public void Should_Return_TrueDirectionOfRover()
     {
@@ -25,5 +25,17 @@ public class RotateLeftCommandTest
         rover.Setup(x => x.CurrentPosition).Returns(new Position(1, 2, Direction.E));
         _leftCommand.Execute(rover.Object);
         Assert.That(rover.Object.CurrentPosition.Direction, Is.EqualTo(Direction.N));
+    }
+
+    [Test]
+    [TestCase(Direction.N)]
+    [TestCase(Direction.W)]
+    [TestCase(Direction.S)]
+    public void Should_Return_IncorrectDirectionOfRover(Direction direction)
+    {
+        var rover = new Mock<IRover>();
+        rover.Setup(x => x.CurrentPosition).Returns(new Position(1, 2, direction));
+        _leftCommand.Execute(rover.Object);
+        Assert.That(rover.Object.CurrentPosition.Direction, Is.Not.EqualTo(Direction.N));
     }
 }

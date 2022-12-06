@@ -1,8 +1,5 @@
-using Moq;
 using NUnit.Framework;
 using SkyKick.Domain.Enum;
-using SkyKick.Domain.Exceptions;
-using SkyKick.Domain.Interfaces;
 using SkyKick.Services.Directions;
 
 namespace SkyKick.Tests.Directions;
@@ -25,7 +22,7 @@ public class DirectionsParserTest
         var res = _directionsParser.Parse(direction);
         Assert.That(res, Is.EqualTo(Direction.E));
     }
-    
+
     [Test]
     [TestCase('N')]
     [TestCase('S')]

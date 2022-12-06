@@ -14,12 +14,28 @@ public class EnumsExtensionTest
         var next = direction.Next();
         Assert.That(next, Is.EqualTo(Direction.E));
     }
-    
+
     [Test]
     public void Should_Return_PreviousItemInEnum()
     {
         const Direction direction = Direction.N;
         var next = direction.Previous();
         Assert.That(next, Is.EqualTo(Direction.W));
+    }
+
+    [Test]
+    public void Should_Return_IncorrectPreviousItem()
+    {
+        const Direction direction = Direction.N;
+        var next = direction.Previous();
+        Assert.That(next, Is.Not.EqualTo(Direction.S));
+    }
+
+    [Test]
+    public void Should_Return_IncorrectNextItem()
+    {
+        const Direction direction = Direction.N;
+        var next = direction.Next();
+        Assert.That(next, Is.Not.EqualTo(Direction.N));
     }
 }
