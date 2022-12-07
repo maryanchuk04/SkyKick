@@ -4,7 +4,6 @@ using SkyKick.Domain.Enum;
 using SkyKick.Domain.Interfaces;
 using SkyKick.Domain.Models;
 using SkyKick.Services.Command;
-using SkyKick.Services.Extensions;
 
 namespace SkyKick.Tests.Command;
 
@@ -21,26 +20,26 @@ public class RotateLeftCommandTest
     }
 
     [Test]
-    [TestCase(Direction.E)]
-    [TestCase(Direction.S)]
-    [TestCase(Direction.W)]
-    [TestCase(Direction.N)]
-    public void Should_Return_TrueDirectionOfRover(Direction direction)
+    [TestCase(Direction.E, Direction.N)]
+    [TestCase(Direction.S, Direction.E)]
+    [TestCase(Direction.W, Direction.S)]
+    [TestCase(Direction.N, Direction.W)]
+    public void Should_Return_TrueDirectionOfRover(Direction direction, Direction expectedDirection)
     {
         rover.Setup(x => x.CurrentPosition).Returns(new Position(1, 2, direction));
         _leftCommand.Execute(rover.Object);
-        Assert.That(rover.Object.CurrentPosition.Direction, Is.EqualTo(direction.Previous()));
+        Assert.That(rover.Object.CurrentPosition.Direction, Is.EqualTo(expectedDirection));
     }
 
     [Test]
-    [TestCase(Direction.N)]
-    [TestCase(Direction.W)]
-    [TestCase(Direction.S)]
-    [TestCase(Direction.E)]
-    public void Should_Return_IncorrectDirectionOfRover(Direction direction)
+    [TestCase(Direction.N, Direction.E)]
+    [TestCase(Direction.W, Direction.N)]
+    [TestCase(Direction.S, Direction.W)]
+    [TestCase(Direction.E, Direction.S)]
+    public void Should_Return_IncorrectDirectionOfRover(Direction direction, Direction expectedDirection)
     {
         rover.Setup(x => x.CurrentPosition).Returns(new Position(1, 2, direction));
         _leftCommand.Execute(rover.Object);
-        Assert.That(rover.Object.CurrentPosition.Direction, Is.Not.EqualTo(direction));
+        Assert.That(rover.Object.CurrentPosition.Direction, Is.Not.EqualTo(expectedDirection));
     }
 }

@@ -29,7 +29,7 @@ public class CoordinatesValidatorsTest
     [Test]
     [TestCase(5,5)]
     [TestCase(4,4)]
-    public void Should_Throws_ValidCoordinates(int x, int y)
+    public void Should_DoestNotThrows_ValidCoordinates(int x, int y)
     {
         Assert.DoesNotThrow(() =>
         {

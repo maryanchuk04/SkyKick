@@ -37,7 +37,7 @@ public class CommandsBuilderTest
         SetupMocks(new List<char>{'N'}, new List<ICommand> { new RotateLeftCommand()});
         var res = _commandsBuilder.Build();
 
-        Assert.True(res.Any());
+        Assert.That(res.Any(), Is.True);
     }
 
     [Test]
