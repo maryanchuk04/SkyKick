@@ -13,9 +13,8 @@ namespace SkyKick.Tests.Builders;
 public class PlateauBuilderTest
 {
     private PlateauBuilder _plateauBuilder;
-    private readonly Mock<ICoordinateProvider> _coordinatesProviderMock = new Mock<ICoordinateProvider>();
-    private readonly Mock<ICoordinatesValidator> _coordinatesValidatorMock = new Mock<ICoordinatesValidator>();
-    private readonly Plateau _expectedPlateau = new Plateau(5, 5);
+    private readonly Mock<ICoordinateProvider> _coordinatesProviderMock = new ();
+    private readonly Mock<ICoordinatesValidator> _coordinatesValidatorMock = new ();
 
     [SetUp]
     public void SetUp()
@@ -33,12 +32,13 @@ public class PlateauBuilderTest
     [Test]
     public void Should_Return_NewPlateauWithCorrectData()
     {
+        var sut = new Plateau(5, 5);
         _coordinatesProviderMock.Setup(x => x.Provide()).Returns((5, 5));
         var res = _plateauBuilder.Build();
         Assert.Multiple(() =>
         {
-            Assert.That(res.UpperBoundX, Is.EqualTo(_expectedPlateau.UpperBoundX));
-            Assert.That(res.UpperBoundY, Is.EqualTo(_expectedPlateau.UpperBoundY));
+            Assert.That(res.UpperBoundX, Is.EqualTo(sut.UpperBoundX));
+            Assert.That(res.UpperBoundY, Is.EqualTo(sut.UpperBoundY));
         });
     }
 
@@ -48,12 +48,13 @@ public class PlateauBuilderTest
     [TestCase(12,1)]
     public void Should_Return_NewPlateauWithInCorrectData(int testValue1, int testValue2)
     {
+        var sut = new Plateau(5, 5);
         _coordinatesProviderMock.Setup(x => x.Provide()).Returns((testValue1, testValue2));
         var res = _plateauBuilder.Build();
         Assert.Multiple(() =>
         {
-            Assert.That(res.UpperBoundX, Is.Not.EqualTo(_expectedPlateau.UpperBoundX));
-            Assert.That(res.UpperBoundY, Is.Not.EqualTo(_expectedPlateau.UpperBoundY));
+            Assert.That(res.UpperBoundX, Is.Not.EqualTo(sut.UpperBoundX));
+            Assert.That(res.UpperBoundY, Is.Not.EqualTo(sut.UpperBoundY));
         });
     }
 }

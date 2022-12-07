@@ -16,11 +16,14 @@ public class DirectionsParserTest
     }
 
     [Test]
-    [TestCase('E')]
-    public void Should_Return_TrueValueOfDirection(char direction)
+    [TestCase('E', Direction.E)]
+    [TestCase('W', Direction.W)]
+    [TestCase('S', Direction.S)]
+    [TestCase('N', Direction.N)]
+    public void Should_Return_TrueValueOfDirection(char direction, Direction expectedDirection)
     {
         var res = _directionsParser.Parse(direction);
-        Assert.That(res, Is.EqualTo(Direction.E));
+        Assert.That(res, Is.EqualTo(expectedDirection));
     }
 
     [Test]

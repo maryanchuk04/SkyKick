@@ -36,9 +36,9 @@ public class MoveUpCommandTest
     [TestCase(3)]
     public void Should_MoveUpRover_Return_TrueValues(int y)
     {
-        var startPosition = new Position(1, y, Direction.N);
-        var expectedY = startPosition.Y + 1;
-        _mockRover.Setup(x => x.CurrentPosition).Returns(startPosition);
+        var sut = new Position(1, y, Direction.N);
+        var expectedY = sut.Y + 1;
+        _mockRover.Setup(x => x.CurrentPosition).Returns(sut);
         _moveUpCommand.Execute(_mockRover.Object);
 
         Assert.That(_mockRover.Object.CurrentPosition.Y, Is.EqualTo(expectedY));

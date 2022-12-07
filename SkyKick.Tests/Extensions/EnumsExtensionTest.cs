@@ -38,4 +38,36 @@ public class EnumsExtensionTest
         var next = direction.Next();
         Assert.That(next, Is.Not.EqualTo(Direction.N));
     }
+
+    [Test]
+    [TestCase(Direction.E)]
+    [TestCase(Direction.S)]
+    [TestCase(Direction.N)]
+    [TestCase(Direction.W)]
+    public void Next_Should_Return_ToTheSameDirection(Direction direction)
+    {
+        var sut = direction;
+        for (int i = 0; i < 4; i++)
+        {
+            sut.Next();
+        }
+
+        Assert.That(sut, Is.EqualTo(direction));
+    }
+    
+    [Test]
+    [TestCase(Direction.E)]
+    [TestCase(Direction.S)]
+    [TestCase(Direction.N)]
+    [TestCase(Direction.W)]
+    public void Previous_Should_Return_ToTheSameDirection(Direction direction)
+    {
+        var sut = direction;
+        for (int i = 0; i < 4; i++)
+        {
+            sut.Previous();
+        }
+
+        Assert.That(sut, Is.EqualTo(direction));
+    }
 }

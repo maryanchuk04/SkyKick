@@ -7,25 +7,30 @@ namespace SkyKick.Tests.Command;
 [TestFixture]
 public class CommandParserTest
 {
-    private static readonly List<char> testCase = new()
-    {
-        'M', 'M', 'R', 'M', 'M', 'M', 'R', 'R', 'M'
-    };
-
     [Test]
     public void Should_Return_SameAmountCommands()
     {
+        List<char> sut = new()
+        {
+            'M', 'M', 'R', 'M', 'M', 'M', 'R', 'R', 'M'
+        };
+        
         var commandParser = new CommandParser();
-        var list = commandParser.Parse(testCase);
-        Assert.That(testCase, Has.Count.EqualTo(list.Count));
+        var list = commandParser.Parse(sut);
+        Assert.That(sut, Has.Count.EqualTo(list.Count));
     }
 
     [Test]
     public void Should_Return_NotCorrectList()
     {
+        List<char> sut = new()
+        {
+            'M', 'M', 'R', 'M', 'M', 'M', 'R', 'R', 'M'
+        };
+        
         var commands = new List<char> {'L', 'M', 'L'};
         var commandParser = new CommandParser();
-        var list = commandParser.Parse(testCase);
+        var list = commandParser.Parse(sut);
         Assert.That(commands, Has.Count.Not.EqualTo(list.Count));
     }
 
